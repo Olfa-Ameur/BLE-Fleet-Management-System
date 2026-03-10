@@ -1,5 +1,3 @@
-# BLE-Fleet-Management-System
-Embedded fleet management identification system using Bluetooth Low Energy (BLE) between STM32WB55 and BWS-GR1 tracker.
 # BLE Driver Identification System for Fleet Management
 
 This project presents an embedded system designed to replace the traditional physical iButton driver identification mechanism used in fleet management systems with a wireless Bluetooth Low Energy (BLE) based authentication solution.
@@ -130,5 +128,30 @@ The development environment includes:
 
 ---
 
-# Repository Structure
+# Skills Demonstrated
 
+This project demonstrates several embedded systems engineering skills:
+
+- Embedded firmware development
+- Bluetooth Low Energy communication
+- Multi-microcontroller architecture
+- UART communication protocols
+- IoT system integration
+- Real-time embedded software design
+
+---
+
+# Author
+
+Olfa Ameur  
+
+Embedded Systems Engineer  
+
+Fields of interest:
+
+Embedded Systems  
+Internet of Things  
+Bluetooth Low Energy  
+Smart Vehicle Systems  
+
+---
