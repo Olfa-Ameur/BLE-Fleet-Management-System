@@ -1,157 +1,181 @@
-# BLE Driver Identification System for Fleet Management
+# BLE Fleet Management System
 
-This project presents an embedded system designed to replace the traditional physical iButton driver identification mechanism used in fleet management systems with a wireless Bluetooth Low Energy (BLE) based authentication solution.
+Embedded system for driver identification and vehicle tracking using Bluetooth Low Energy (BLE).
 
-The system enables secure driver identification using a smartphone application and a BLE communication architecture between two microcontrollers integrated in a vehicle tracking device.
+This project was developed as part of an engineering final-year project at **Be Wireless Solutions (BWS)**.  
+The objective is to replace the traditional **physical driver identification system (iButton)** with a **secure wireless BLE-based solution** integrated into an existing fleet management device.
 
-This work was developed as part of an engineering final year project.
+The system enables driver authentication via smartphone and allows real-time GPS position retrieval from the vehicle tracker.
 
 ---
 
 # Project Overview
 
-Fleet management systems traditionally use physical authentication devices such as iButton keys to identify drivers before allowing the vehicle to operate.
+Fleet management systems traditionally rely on **physical identification keys** such as iButton devices.  
+Although widely used, these systems present several limitations:
 
-However, this approach presents several limitations:
+- mechanical wear of readers and keys
+- risk of loss or duplication of physical identifiers
+- manual interaction required for identification
+- limited automation capabilities
 
-- Physical wear of the iButton keys
-- Risk of loss or duplication
-- Lack of flexibility
-- Maintenance constraints
+To address these issues, this project proposes a **wireless driver identification system using Bluetooth Low Energy (BLE)**.
 
-To address these limitations, this project proposes a wireless driver authentication system using Bluetooth Low Energy.
-
-The driver is authenticated using a mobile application that communicates with the embedded BLE module integrated in the vehicle system.
+A dedicated BLE microcontroller communicates with the existing vehicle tracker and allows driver authentication through a mobile device.
 
 ---
 
 # System Architecture
 
-The proposed system consists of three main components:
+The system is composed of three main elements:
 
-• STM32WB55 BLE module  
-• BWS-GR1 fleet management device  
-• Mobile application for driver identification  
-
-The communication architecture is illustrated below:
-
-Smartphone Application  
-        │  
-        │ BLE Communication  
-        ▼  
-STM32WB55 BLE Node  
-        │  
-        │ UART Communication  
-        ▼  
-BWS-GR1 Fleet Tracker  
-        │  
-        ▼  
-GPS Module (SIM868)  
-        │  
-        ▼  
-Fleet Management Platform  
-
-The BLE module receives identification requests from the mobile application and transfers the authentication information to the BWS-GR1 tracker via UART communication.
-
----
-
-# Key Features
-
-- Wireless driver identification using BLE
-- Replacement of physical iButton authentication
-- Communication between two embedded systems
-- UART data exchange between microcontrollers
-- GPS notification and fleet monitoring
-- Mobile application interaction
+1. Mobile application (BLE client)
+2. BLE communication module (STM32WB55)
+3. Vehicle tracker (BWS-GR1) with integrated GPS module
 
 ---
 
 # Hardware Components
 
-The system is implemented using the following hardware components:
+The prototype system is based on the following hardware components:
 
-STM32WB55 microcontroller  
-BLE communication module  
-BWS-GR1 fleet tracking device  
-SIM868 GPS communication module  
-Smartphone mobile application  
+• **STM32WB55 microcontroller** – BLE communication module  
+• **BWS-GR1 tracker** – embedded fleet management device  
+• **SIM868 module** – GPS positioning module  
+• **Smartphone** – BLE client used for driver identification  
 
----
-
-# Firmware Architecture
-
-The project firmware is divided into two main embedded applications.
-
-## 1. STM32WB55 BLE Node
-
-Responsible for:
-
-- BLE communication with the mobile application
-- Receiving identification requests
-- Transmitting authentication data to the tracker
-- Managing BLE services and notifications
-
-Key files include:
-
-- `app_ble.c`
-- `custom_stm.c`
-- `command_parser.c`
+The STM32WB55 provides native Bluetooth Low Energy connectivity and ensures secure communication with the mobile device.
 
 ---
 
-## 2. BWS-GR1 Tracker Firmware
+# Software Architecture
 
-Responsible for:
-
-- Receiving identification data via UART
-- Managing GPS communication
-- Sending driver identification notifications
-- Interacting with the fleet management system
-
-Key modules include:
-
-- `gps_functions.c`
-- `command_parse.c`
-- `uart.c`
-
----
-
-# Software Tools
-
-The development environment includes:
+The embedded firmware was developed using:
 
 - STM32CubeIDE
-- Embedded C
-- STM32 HAL libraries
-- Bluetooth Low Energy stack
-- UART communication drivers
+- STM32 HAL drivers
+- STM32WPAN middleware (Bluetooth stack)
+
+The software architecture includes the following main modules:
+
+- BLE GATT service
+- UART communication interface
+- GPS data processing module
+- command parsing module
+- system event management
+
+The system is designed to remain **modular and portable for future embedded applications**.
 
 ---
 
-# Skills Demonstrated
+# BLE Communication
 
-This project demonstrates several embedded systems engineering skills:
+A custom **BLE GATT service** was implemented to manage communication between the mobile device and the embedded system.
 
-- Embedded firmware development
-- Bluetooth Low Energy communication
-- Multi-microcontroller architecture
-- UART communication protocols
-- IoT system integration
-- Real-time embedded software design
+The service contains two main characteristics:
+
+### Write Characteristic
+Used by the mobile application to send commands such as:
+
+- driver identification request
+- position request
+
+### Notification Characteristic
+Used by the embedded system to send responses to the mobile application, including:
+
+- identification status
+- GPS position
+
+---
+
+# UART Communication
+
+The STM32WB55 communicates with the BWS-GR1 tracker using a **UART interface**.
+
+This communication link is responsible for:
+
+- forwarding identification commands to the tracker
+- receiving GPS information from the SIM868 module
+- sending responses back to the BLE module
+
+The UART interface ensures reliable data exchange between both embedded devices.
+
+---
+
+# GPS Data Processing
+
+Vehicle position data is obtained from the **SIM868 GPS module** integrated in the tracker.
+
+GPS data is transmitted in **NMEA format**, which includes frames such as:
+$GPGGA
+$GPRMC
+
+The firmware parses these frames to extract key parameters:
+
+- latitude
+- longitude
+- speed
+- timestamp
+
+The extracted information is then sent to the mobile application via BLE notifications.
+
+---
+
+# Security Features
+
+Security mechanisms were integrated into the BLE communication layer to ensure safe access to the system.
+
+Implemented features include:
+
+- BLE pairing and bonding
+- encrypted communication
+- passkey authentication
+- access control for GATT characteristics
+
+These mechanisms protect the system against unauthorized connections and data interception.
+
+---
+
+# Development Tools
+
+The project was developed using the following tools:
+
+- **STM32CubeIDE** – embedded development environment
+- **STM32WPAN** – Bluetooth middleware
+- **ST BLE Toolbox** – BLE testing application
+- **MIT App Inventor** – prototype mobile application
+
+---
+
+# Testing and Validation
+
+Several validation tests were performed during development:
+
+• BLE communication tests  
+• UART communication validation  
+• GPS data acquisition tests  
+• secure authentication tests  
+• end-to-end system validation
+
+These tests confirmed the feasibility of a **BLE-based driver identification system integrated with the existing fleet management infrastructure**.
+
+---
+
+---
+
+# Future Improvements
+
+Potential future enhancements include:
+
+- integration of BLE directly inside the tracker hardware
+- development of a production-ready mobile application
+- cloud connectivity for remote fleet monitoring
+- advanced security mechanisms
 
 ---
 
 # Author
 
 Olfa Ameur  
+Embedded Systems Engineering
 
-Embedded Systems Engineer  
-
-Fields of interest:
-
-Embedded Systems  
-Internet of Things  
-Bluetooth Low Energy  
-Smart Vehicle Systems  
-
----
