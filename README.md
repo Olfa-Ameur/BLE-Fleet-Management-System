@@ -169,7 +169,6 @@ Potential future enhancements include:
 
 - integration of BLE directly inside the tracker hardware
 - development of a production-ready mobile application
-- cloud connectivity for remote fleet monitoring
 - advanced security mechanisms
 
 ---
