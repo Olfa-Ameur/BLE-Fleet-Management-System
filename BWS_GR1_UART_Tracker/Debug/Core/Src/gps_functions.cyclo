@@ -1,8 +1,0 @@
-../Core/Src/gps_functions.c:36:6:Check_Status_Pin	2
-../Core/Src/gps_functions.c:50:6:SIM868_PowerOn	1
-../Core/Src/gps_functions.c:65:8:SIM868_SendCommand	1
-../Core/Src/gps_functions.c:74:8:GPS_init	1
-../Core/Src/gps_functions.c:85:9:convert_ch_to_float	3
-../Core/Src/gps_functions.c:105:8:ParsePosition	8
-../Core/Src/gps_functions.c:138:8:extractGNGGAFrame	2
-../Core/Src/gps_functions.c:147:9:GET_GPS	2
