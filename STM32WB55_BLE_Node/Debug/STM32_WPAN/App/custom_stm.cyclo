@@ -1,8 +1,0 @@
-../STM32_WPAN/App/custom_stm.c:105:6:Transmit_Command_To_Boitier_gps	1
-../STM32_WPAN/App/custom_stm.c:113:6:Notify_function_BLE	1
-../STM32_WPAN/App/custom_stm.c:155:30:Custom_STM_Event_Handler	8
-../STM32_WPAN/App/custom_stm.c:326:6:SVCCTL_InitCustomSvc	1
-../STM32_WPAN/App/custom_stm.c:443:12:Custom_STM_App_Update_Char	3
-../STM32_WPAN/App/custom_stm.c:509:12:Custom_STM_App_Update_Char_Variable_Length	3
-../STM32_WPAN/App/custom_stm.c:575:12:Custom_STM_App_Update_Char_Ext	3
-../STM32_WPAN/App/custom_stm.c:628:19:Generic_STM_App_Update_Char_Ext	2
