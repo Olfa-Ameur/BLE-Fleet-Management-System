@@ -1,0 +1,3 @@
+../Core/Src/command_parse.c:15:5:is_valid_id	3
+../Core/Src/command_parse.c:24:13:Get_Command_Type	4
+../Core/Src/command_parse.c:35:6:Command_Parse	6
